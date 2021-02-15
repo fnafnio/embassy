@@ -18,7 +18,10 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
-          target: thumbv7em-none-eabi
           override: true
+      - name: install
+        run: rustup target add thumbv7em-none-eabi thumbv6m-none-eabi
       - name: Build
         run: ./test-build.sh
+
+        

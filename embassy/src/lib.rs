@@ -16,3 +16,8 @@ pub mod rand;
 pub mod time;
 pub mod uart;
 pub mod util;
+
+#[cfg(armv6m)]
+pub use atomic_emu as atomic;
+#[cfg(not(armv6m))]
+pub use core::sync::atomic;

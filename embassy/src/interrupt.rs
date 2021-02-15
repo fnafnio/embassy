@@ -1,6 +1,7 @@
 use core::ptr;
-use core::sync::atomic::{AtomicPtr, Ordering};
 use cortex_m::peripheral::NVIC;
+
+use crate::atomic::{AtomicBool, AtomicPtr, Ordering};
 
 pub use embassy_macros::interrupt_declare as declare;
 pub use embassy_macros::interrupt_take as take;
@@ -62,6 +63,7 @@ pub unsafe trait OwnedInterrupt {
     }
 
     #[inline]
+    #[cfg(not(armv6m))]
     fn is_active(&self) -> bool {
         NVIC::is_active(NrWrap(self.number()))
     }
