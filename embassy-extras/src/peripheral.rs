@@ -6,7 +6,7 @@ use core::sync::atomic::{compiler_fence, Ordering};
 
 use embassy::interrupt::{Interrupt, InterruptExt};
 
-use crate::fmt::assert;
+use crate::fmt::{assert, unwrap};
 
 pub trait PeripheralState {
     type Interrupt: Interrupt;
