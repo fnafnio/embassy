@@ -1,5 +1,6 @@
 #![macro_use]
 #![allow(clippy::module_inception)]
+#![allow(unused)]
 
 #[cfg(all(feature = "defmt", feature = "log"))]
 compile_error!("You may not enable both `defmt` and `log` features.");
@@ -32,35 +33,30 @@ mod fmt {
         unreachable,
     };
 
-    #[macro_export]
     macro_rules! trace {
         ($($msg:expr),+ $(,)?) => {
             ()
         };
     }
 
-    #[macro_export]
     macro_rules! debug {
         ($($msg:expr),+ $(,)?) => {
             ()
         };
     }
 
-    #[macro_export]
     macro_rules! info {
         ($($msg:expr),+ $(,)?) => {
             ()
         };
     }
 
-    #[macro_export]
     macro_rules! warn {
         ($($msg:expr),+ $(,)?) => {
             ()
         };
     }
 
-    #[macro_export]
     macro_rules! error {
         ($($msg:expr),+ $(,)?) => {
             ()
@@ -69,7 +65,6 @@ mod fmt {
 }
 
 #[cfg(not(feature = "defmt"))]
-#[macro_export]
 macro_rules! unwrap {
     ($arg:expr) => {
         match $crate::fmt::Try::into_result($arg) {
