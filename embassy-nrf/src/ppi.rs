@@ -97,14 +97,14 @@ impl<'d, C: ConfigurableChannel> Ppi<'d, C> {
 
 pub struct Task(pub NonNull<()>);
 impl Task {
-    pub(crate) fn from_reg<T>(reg: &T) -> Self {
+    pub fn from_reg<T>(reg: &T) -> Self {
         Self(unsafe { NonNull::new_unchecked(reg as *const _ as *mut ()) })
     }
 }
 
 pub struct Event(pub NonNull<()>);
 impl Event {
-    pub(crate) fn from_reg<T>(reg: &T) -> Self {
+    pub fn from_reg<T>(reg: &T) -> Self {
         Self(unsafe { NonNull::new_unchecked(reg as *const _ as *mut ()) })
     }
 }
