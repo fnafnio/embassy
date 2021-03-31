@@ -11,6 +11,8 @@ pub struct Args {
     pub sysclk: Option<u32>,
     #[darling(default)]
     pub pclk1: Option<u32>,
+    #[darling(default)]
+    pub require_pll48clk: bool,
 }
 
 pub fn generate(args: Args) -> TokenStream {
@@ -30,6 +32,10 @@ pub fn generate(args: Args) -> TokenStream {
         clock_cfg_args = quote! { #clock_cfg_args.pclk1(#mhz.mhz()) };
     }
 
+    if args.require_pll48clk {
+        clock_cfg_args = quote! { #clock_cfg_args.require_pll48clk() };
+    }
+
     quote!(
         use embassy_stm32::{rtc, interrupt, Peripherals, pac, hal::rcc::RccExt, hal::time::U32Ext};
 
@@ -47,5 +53,6 @@ pub fn generate(args: Args) -> TokenStream {
         unsafe { embassy::time::set_clock(rtc) };
 
         let alarm = unsafe { make_static(&mut alarm) };
+        executor.set_alarm(alarm);
     )
 }
