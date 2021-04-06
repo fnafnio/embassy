@@ -29,9 +29,7 @@ members = [
 
     # stm32
     #"embassy-stm32",
-    #"embassy-stm32f4",
-    #"embassy-stm32l0",
-    #"embassy-stm32f4-examples",
+    #"embassy-stm32-examples",
 
     # rp2040
     #"embassy-rp",
